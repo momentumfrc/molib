@@ -11,13 +11,11 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.momentum4999.molib.encoder.TalonFxEncoder;
-
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
-
 import java.util.function.Function;
 
 public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {

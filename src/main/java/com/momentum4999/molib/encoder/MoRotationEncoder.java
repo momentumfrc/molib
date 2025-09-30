@@ -11,7 +11,6 @@ import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.AngularVelocityUnit;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
-
 import java.util.function.Consumer;
 
 public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit> {

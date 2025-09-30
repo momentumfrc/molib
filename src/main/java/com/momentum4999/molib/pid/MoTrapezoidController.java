@@ -14,7 +14,6 @@ import edu.wpi.first.units.Unit;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.util.datalog.IntegerLogEntry;
 import edu.wpi.first.wpilibj.DataLogManager;
-
 import java.util.function.Consumer;
 
 public abstract class MoTrapezoidController<

@@ -11,7 +11,6 @@ import edu.wpi.first.units.AngularVelocityUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
-
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

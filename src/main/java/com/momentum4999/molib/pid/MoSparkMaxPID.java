@@ -10,7 +10,6 @@ import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
-
 import java.util.function.Consumer;
 
 public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {

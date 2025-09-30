@@ -1,7 +1,6 @@
 package com.momentum4999.molib;
 
 import com.momentum4999.molib.encoder.MoRotationEncoder;
-
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.DimensionlessUnit;
 import edu.wpi.first.units.Measure;

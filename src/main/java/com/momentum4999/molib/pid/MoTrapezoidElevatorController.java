@@ -10,7 +10,6 @@ import edu.wpi.first.units.LinearAccelerationUnit;
 import edu.wpi.first.units.LinearVelocityUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Units;
-
 import java.util.function.Consumer;
 
 public class MoTrapezoidElevatorController

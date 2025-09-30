@@ -11,7 +11,6 @@ import edu.wpi.first.units.DistanceUnit;
 import edu.wpi.first.units.LinearVelocityUnit;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearVelocity;
-
 import java.util.function.Consumer;
 
 public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUnit> {

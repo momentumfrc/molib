@@ -11,7 +11,6 @@ import edu.wpi.first.units.DistanceUnit;
 import edu.wpi.first.units.LinearVelocityUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Units;
-
 import java.util.Optional;
 import java.util.function.Consumer;
 
