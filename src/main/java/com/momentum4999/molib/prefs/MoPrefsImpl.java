@@ -35,7 +35,7 @@ public class MoPrefsImpl {
                     cleaned);
         }
         activeKeys.add(key);
-        return instance.getEntry(key);
+        return backingTable.getEntry(key);
     }
 
     public static void cleanUpPrefs() {
