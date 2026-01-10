@@ -1,12 +1,12 @@
 package frc.robot.molib;
 
-import frc.robot.molib.encoder.MoRotationEncoder;
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.DimensionlessUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import frc.robot.molib.encoder.MoRotationEncoder;
 
 public class Utils {
     private static final double ENCODER_ZERO_ZONE = 0.2;

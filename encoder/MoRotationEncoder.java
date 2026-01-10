@@ -1,7 +1,6 @@
 package frc.robot.molib.encoder;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import frc.robot.molib.MoSparkConfigurator;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
@@ -11,6 +10,7 @@ import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.AngularVelocityUnit;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
+import frc.robot.molib.MoSparkConfigurator;
 import java.util.function.Consumer;
 
 public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit> {

@@ -1,7 +1,5 @@
 package frc.robot.molib.pid;
 
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.encoder.MoEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -10,6 +8,8 @@ import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
+import frc.robot.molib.MoSparkConfigurator;
+import frc.robot.molib.encoder.MoEncoder;
 import java.util.function.Consumer;
 
 public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {

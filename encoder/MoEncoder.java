@@ -1,8 +1,6 @@
 package frc.robot.molib.encoder;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.MoUnits;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
@@ -14,6 +12,8 @@ import edu.wpi.first.units.MutableMeasure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
+import frc.robot.molib.MoSparkConfigurator;
+import frc.robot.molib.MoUnits;
 import java.util.function.Consumer;
 
 /**

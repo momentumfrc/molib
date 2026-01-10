@@ -1,6 +1,5 @@
 package frc.robot.molib.pid;
 
-import frc.robot.molib.encoder.MoDistanceEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.config.SparkBaseConfig;
@@ -10,6 +9,7 @@ import edu.wpi.first.units.LinearAccelerationUnit;
 import edu.wpi.first.units.LinearVelocityUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Units;
+import frc.robot.molib.encoder.MoDistanceEncoder;
 import java.util.function.Consumer;
 
 public class MoTrapezoidElevatorController

@@ -1,7 +1,5 @@
 package frc.robot.molib.pid;
 
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.encoder.MoRotationEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -11,6 +9,8 @@ import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.AngularVelocityUnit;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Units;
+import frc.robot.molib.MoSparkConfigurator;
+import frc.robot.molib.encoder.MoRotationEncoder;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;

@@ -1,6 +1,5 @@
 package frc.robot.molib.pid;
 
-import frc.robot.molib.encoder.MoEncoder;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -14,6 +13,7 @@ import edu.wpi.first.units.Unit;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.util.datalog.IntegerLogEntry;
 import edu.wpi.first.wpilibj.DataLogManager;
+import frc.robot.molib.encoder.MoEncoder;
 import java.util.function.Consumer;
 
 public abstract class MoTrapezoidController<

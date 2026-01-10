@@ -1,7 +1,6 @@
 package frc.robot.molib.encoder;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import frc.robot.molib.MoSparkConfigurator;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
@@ -11,6 +10,7 @@ import edu.wpi.first.units.DistanceUnit;
 import edu.wpi.first.units.LinearVelocityUnit;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearVelocity;
+import frc.robot.molib.MoSparkConfigurator;
 import java.util.function.Consumer;
 
 public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUnit> {

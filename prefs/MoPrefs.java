@@ -1,6 +1,5 @@
 package frc.robot.molib.prefs;
 
-import frc.robot.molib.MoUnits;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.units.AngleUnit;
@@ -19,6 +18,7 @@ import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearAcceleration;
 import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.units.measure.Time;
+import frc.robot.molib.MoUnits;
 
 /**
  * Base class for robot preferences.
