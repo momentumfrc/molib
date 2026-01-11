@@ -10,9 +10,11 @@ import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
 import frc.robot.molib.MoSparkConfigurator;
 import frc.robot.molib.encoder.MoEncoder;
+import frc.robot.molib.motune.MoTuner;
 import java.util.function.Consumer;
 
-public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
+public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
+        implements MoTuner.PIDController, MoTuner.MotorFF {
     protected final Type type;
     protected final SparkBase motorController;
     protected final ClosedLoopSlot pidSlot;
@@ -65,20 +67,34 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
         return pidSlot;
     }
 
+    @Override
     public void setP(double kP) {
         setConfigOption(config -> config.closedLoop.p(kP, pidSlot));
     }
 
+    @Override
     public void setI(double kI) {
         setConfigOption(config -> config.closedLoop.i(kI, pidSlot));
     }
 
+    @Override
     public void setD(double kD) {
         setConfigOption(config -> config.closedLoop.d(kD, pidSlot));
     }
 
-    public void setFF(double kFF) {
-        setConfigOption(config -> config.closedLoop.velocityFF(kFF, pidSlot));
+    @Override
+    public void setS(double kS) {
+        setConfigOption(config -> config.closedLoop.feedForward.kS(kS, pidSlot));
+    }
+
+    @Override
+    public void setV(double kV) {
+        setConfigOption(config -> config.closedLoop.feedForward.kV(kV, pidSlot));
+    }
+
+    @Override
+    public void setA(double kA) {
+        setConfigOption(config -> config.closedLoop.feedForward.kA(kA, pidSlot));
     }
 
     public void setIZone(double iZone) {
@@ -125,7 +141,7 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
                     String.format("Cannot set position on PID controller of type %s", this.type.name()));
         }
         double value = position.in(internalEncoder.getInternalEncoderUnits());
-        pidController.setReference(value, this.type.innerType, pidSlot);
+        pidController.setSetpoint(value, this.type.innerType, pidSlot);
         lastSetpoint = value;
     }
 
@@ -135,7 +151,7 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
                     String.format("Cannot set velocity on PID controller of type %s", this.type.name()));
         }
         double value = velocity.in(internalEncoder.getInternalEncoderVelocityUnits());
-        pidController.setReference(value, this.type.innerType, pidSlot);
+        pidController.setSetpoint(value, this.type.innerType, pidSlot);
         lastSetpoint = value;
     }
 

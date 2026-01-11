@@ -16,9 +16,11 @@ import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.molib.encoder.TalonFxEncoder;
+import frc.robot.molib.motune.MoTuner;
 import java.util.function.Function;
 
-public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
+public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
+        implements MoTuner.PIDController, MoTuner.MotorFF {
     private final Type type;
     private final TalonFX motorController;
     private final Slot0Configs slotPIDConfigs = new Slot0Configs();
@@ -51,23 +53,39 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         motorController.getConfigurator().apply(slotPIDConfigs);
     }
 
+    @Override
     public void setP(double kP) {
         slotPIDConfigs.kP = kP;
         applyConfigs();
     }
 
+    @Override
     public void setI(double kI) {
         slotPIDConfigs.kI = kI;
         applyConfigs();
     }
 
+    @Override
     public void setD(double kD) {
         slotPIDConfigs.kD = kD;
         applyConfigs();
     }
 
-    public void setFF(double kFF) {
-        slotPIDConfigs.kV = kFF;
+    @Override
+    public void setS(double kS) {
+        slotPIDConfigs.kS = kS;
+        applyConfigs();
+    }
+
+    @Override
+    public void setV(double kV) {
+        slotPIDConfigs.kV = kV;
+        applyConfigs();
+    }
+
+    @Override
+    public void setA(double kA) {
+        slotPIDConfigs.kA = kA;
         applyConfigs();
     }
 
