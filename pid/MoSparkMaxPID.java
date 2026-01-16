@@ -1,9 +1,12 @@
 package frc.robot.molib.pid;
 
+import java.util.function.Consumer;
+
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.config.SparkBaseConfig;
+
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.TimeUnit;
@@ -11,15 +14,14 @@ import edu.wpi.first.units.Unit;
 import frc.robot.molib.MoSparkConfigurator;
 import frc.robot.molib.encoder.MoEncoder;
 import frc.robot.molib.motune.MoTuner;
-import java.util.function.Consumer;
 
 public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
-        implements MoTuner.PIDController, MoTuner.MotorFF {
+        implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
     protected final Type type;
     protected final SparkBase motorController;
     protected final ClosedLoopSlot pidSlot;
     protected final SparkClosedLoopController pidController;
-    protected final Consumer<Consumer<SparkBaseConfig>> configurator;
+    protected final MoSparkConfigurator configurator;
 
     protected final MoEncoder<Dim, VDim> internalEncoder;
 
@@ -45,7 +47,7 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
             SparkBase controller,
             ClosedLoopSlot pidSlot,
             MoEncoder<Dim, VDim> internalEncoder,
-            Consumer<Consumer<SparkBaseConfig>> configurator) {
+            MoSparkConfigurator configurator) {
         this.type = type;
         this.motorController = controller;
         this.pidSlot = pidSlot;
@@ -102,7 +104,12 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
     }
 
     public void setConfigOption(Consumer<SparkBaseConfig> op) {
-        configurator.accept(op);
+        configurator.acceptWithoutPopulate(op);
+    }
+
+    @Override
+    public void onPopulateFinished() {
+        configurator.populateConfig();
     }
 
     public double getLastOutput() {

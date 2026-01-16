@@ -17,6 +17,7 @@ public class TunerUtils {
                 .iZone(sparkMax::setIZone)
                 .setpoint(sparkMax::getSetpoint)
                 .measurement(sparkMax::getLastMeasurement)
+                .onPopulateFinished(sparkMax)
                 .safeBuild();
     }
 
@@ -28,6 +29,7 @@ public class TunerUtils {
                 .iZone(talon::setIZone)
                 .setpoint(talon::getSetpoint)
                 .measurement(talon::getLastMeasurement)
+                .onPopulateFinished(talon)
                 .safeBuild();
     }
 

@@ -24,7 +24,7 @@ import java.util.function.DoubleSupplier;
  * values are periodically polled and the associated NetworkTable entries are kept up to date.
  */
 public class MoTuner implements NetworkTable.TableEventListener {
-    private static final String TUNER_TABLE = "momentum-tuners";
+    public static final String TUNER_TABLE = "momentum-tuners";
     private static final double DEFAULT_VALUE = 0;
     private static final List<MoTuner> instances = new ArrayList<>();
 
@@ -71,10 +71,23 @@ public class MoTuner implements NetworkTable.TableEventListener {
         void setA(double kA);
     }
 
+    /**
+     * Called after populating values from networktables into PIDParameters.
+     */
+    @FunctionalInterface
+    public interface OnPopulateFinished {
+        void onPopulateFinished();
+
+        static OnPopulateFinished empty() {
+            return () -> {};
+        }
+    }
+
     public static class Builder {
         private final String name;
         private Map<String, PIDParameter> parameters = new HashMap<>();
         private Map<String, PIDStateVariable> stateVariables = new HashMap<>();
+        private OnPopulateFinished populateHook = null;
 
         Builder(String name) {
             this.name = name;
@@ -158,8 +171,17 @@ public class MoTuner implements NetworkTable.TableEventListener {
             return stateVariable("measurement", getter);
         }
 
+        public Builder onPopulateFinished(OnPopulateFinished populateHook) {
+            if (this.populateHook != null) {
+                throw new IllegalArgumentException("Duplicate OnPopulateFinished hook for [" + name + "]");
+            }
+            this.populateHook = populateHook;
+            return this;
+        }
+
         public MoTuner build() {
-            var tuner = new MoTuner(name, parameters, stateVariables);
+            var hook = populateHook != null ? populateHook : OnPopulateFinished.empty();
+            var tuner = new MoTuner(name, parameters, stateVariables, hook);
             recordInstance(tuner);
             return tuner;
         }
@@ -177,6 +199,7 @@ public class MoTuner implements NetworkTable.TableEventListener {
     private final String name;
     private final Map<String, PIDParameter> parameters;
     private final Map<String, PIDStateVariable> stateVariables;
+    private final OnPopulateFinished populateHook;
 
     private final NetworkTable table;
     private final int listenerHandle;
@@ -184,15 +207,19 @@ public class MoTuner implements NetworkTable.TableEventListener {
     private final Map<PIDParameter, NetworkTableEntry> parameterEntries;
     private Map<PIDStateVariable, DoublePublisher> stateVariablePublishers = null;
 
-    private MoTuner(String name, Map<String, PIDParameter> parameters, Map<String, PIDStateVariable> stateVariables) {
+    private MoTuner(
+            String name,
+            Map<String, PIDParameter> parameters,
+            Map<String, PIDStateVariable> stateVariables,
+            OnPopulateFinished populateHook) {
         this.name = name;
 
         this.parameters = Collections.unmodifiableMap(parameters);
         this.stateVariables = Collections.unmodifiableMap(stateVariables);
+        this.populateHook = populateHook;
 
         table = NetworkTableInstance.getDefault().getTable(TUNER_TABLE).getSubTable(name);
-        listenerHandle = table.addListener(
-                EnumSet.of(NetworkTableEvent.Kind.kValueAll, NetworkTableEvent.Kind.kImmediate), this);
+        listenerHandle = table.addListener(EnumSet.of(NetworkTableEvent.Kind.kValueAll), this);
 
         var parameterEntries = new HashMap<PIDParameter, NetworkTableEntry>();
         for (var mapEntry : parameters.entrySet()) {
@@ -202,6 +229,8 @@ public class MoTuner implements NetworkTable.TableEventListener {
             parameterEntries.put(mapEntry.getValue(), entry);
         }
         this.parameterEntries = Collections.unmodifiableMap(parameterEntries);
+
+        refreshParameters();
     }
 
     /**
@@ -212,11 +241,12 @@ public class MoTuner implements NetworkTable.TableEventListener {
             double value = parameterEntries.get(param).getDouble(DEFAULT_VALUE);
             param.setter().accept(value);
         }
+        this.populateHook.onPopulateFinished();
     }
 
     @Override
     public void accept(NetworkTable table, String key, NetworkTableEvent event) {
-        assert event.is(Kind.kImmediate) || event.is(Kind.kValueAll);
+        assert event.is(Kind.kValueAll);
 
         double value = event.valueData.value.getDouble();
 
@@ -226,6 +256,7 @@ public class MoTuner implements NetworkTable.TableEventListener {
         }
 
         param.setter().accept(value);
+        this.populateHook.onPopulateFinished();
     }
 
     private Map<PIDStateVariable, DoublePublisher> getStateVariablePublishers() {

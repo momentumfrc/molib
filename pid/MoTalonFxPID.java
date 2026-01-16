@@ -20,7 +20,7 @@ import frc.robot.molib.motune.MoTuner;
 import java.util.function.Function;
 
 public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
-        implements MoTuner.PIDController, MoTuner.MotorFF {
+        implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
     private final Type type;
     private final TalonFX motorController;
     private final Slot0Configs slotPIDConfigs = new Slot0Configs();
@@ -56,36 +56,35 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
     @Override
     public void setP(double kP) {
         slotPIDConfigs.kP = kP;
-        applyConfigs();
     }
 
     @Override
     public void setI(double kI) {
         slotPIDConfigs.kI = kI;
-        applyConfigs();
     }
 
     @Override
     public void setD(double kD) {
         slotPIDConfigs.kD = kD;
-        applyConfigs();
     }
 
     @Override
     public void setS(double kS) {
         slotPIDConfigs.kS = kS;
-        applyConfigs();
     }
 
     @Override
     public void setV(double kV) {
         slotPIDConfigs.kV = kV;
-        applyConfigs();
     }
 
     @Override
     public void setA(double kA) {
         slotPIDConfigs.kA = kA;
+    }
+
+    @Override
+    public void onPopulateFinished() {
         applyConfigs();
     }
 

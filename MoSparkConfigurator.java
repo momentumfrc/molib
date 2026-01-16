@@ -54,7 +54,15 @@ public class MoSparkConfigurator implements Consumer<Consumer<SparkBaseConfig>> 
 
     @Override
     public synchronized void accept(Consumer<SparkBaseConfig> configurator) {
+        acceptWithoutPopulate(configurator);
+        populateConfig();
+    }
+
+    public void acceptWithoutPopulate(Consumer<SparkBaseConfig> configurator) {
         configurator.accept(config);
+    }
+
+    public void populateConfig() {
         spark.configure(config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
