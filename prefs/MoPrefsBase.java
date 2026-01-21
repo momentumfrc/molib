@@ -23,7 +23,7 @@ import frc.robot.molib.MoUnits;
 /**
  * Base class for robot preferences.
  */
-public abstract class MoPrefs {
+public abstract class MoPrefsBase {
     protected static Pref<Boolean> booleanPref(String key, boolean defaultValue) {
         return new Pref<>(key, defaultValue, NetworkTableValue::getBoolean, NetworkTableEntry::setBoolean);
     }
@@ -100,7 +100,7 @@ public abstract class MoPrefs {
         return new UnitPref<>(key, Units.Volts, defaultValue);
     }
 
-    protected MoPrefs() {
+    protected MoPrefsBase() {
         throw new UnsupportedOperationException("MoPrefs is a static class");
     }
 }
