@@ -8,6 +8,7 @@ import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.AngularVelocityUnit;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import frc.robot.molib.MoSparkConfigurator;
@@ -60,5 +61,9 @@ public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit>
 
     public static MoRotationEncoder forTalonFx(TalonFX talon, AngleUnit internalEncoderUnits) {
         return new MoRotationEncoder(new TalonFxEncoder(talon), internalEncoderUnits);
+    }
+
+    public static MoRotationEncoder forDioAbsolute(int dioPort) {
+        return new MoRotationEncoder(new DIOAbsEncoder(dioPort), Units.Rotations);
     }
 }
