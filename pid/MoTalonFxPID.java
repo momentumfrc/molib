@@ -17,7 +17,6 @@ import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.molib.encoder.TalonFxEncoder;
 import frc.robot.molib.motune.MoTuner;
-import java.util.function.Function;
 
 public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
@@ -123,7 +122,7 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
      */
     @Deprecated(forRemoval = false)
     public void setReference(double value) {
-        this.motorController.setControl(this.type.control.apply(value));
+        this.motorController.setControl(this.type.holder.apply(value));
         this.lastReference = value;
     }
 
@@ -133,7 +132,7 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
                     String.format("Cannot set position on PID controller of type %s", this.type.name()));
         }
         double value = position.in(internalEncoderUnits);
-        this.motorController.setControl(this.type.control.apply(value));
+        this.motorController.setControl(this.type.holder.apply(value));
         lastReference = value;
     }
 
@@ -144,19 +143,32 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         }
 
         double value = velocity.in(internalEncoderVelocity);
-        this.motorController.setControl(this.type.control.apply(value));
+        this.motorController.setControl(this.type.holder.apply(value));
         lastReference = value;
     }
 
+    private static record ControlRequestHolder<T extends ControlRequest>(
+            T controlRequest, ControlRequestHolder.ApplyControlRequest<T> applyControlRequest) {
+        @FunctionalInterface
+        public static interface ApplyControlRequest<T extends ControlRequest> {
+            T apply(T request, double value);
+        }
+
+        public T apply(double value) {
+            return this.applyControlRequest.apply(controlRequest, value);
+        }
+    }
+
     public enum Type {
-        POSITION(v -> new PositionVoltage(v)),
-        SMARTMOTION(v -> new MotionMagicVoltage(v)),
-        VELOCITY(v -> new VelocityVoltage(v));
+        POSITION(new ControlRequestHolder<PositionVoltage>(new PositionVoltage(0), PositionVoltage::withPosition)),
+        SMARTMOTION(new ControlRequestHolder<MotionMagicVoltage>(
+                new MotionMagicVoltage(0), MotionMagicVoltage::withPosition)),
+        VELOCITY(new ControlRequestHolder<VelocityVoltage>(new VelocityVoltage(0), VelocityVoltage::withVelocity));
 
-        public final Function<Double, ControlRequest> control;
+        private final ControlRequestHolder<?> holder;
 
-        private Type(Function<Double, ControlRequest> control) {
-            this.control = control;
+        private Type(ControlRequestHolder<?> holder) {
+            this.holder = holder;
         }
     }
 }
