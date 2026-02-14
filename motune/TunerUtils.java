@@ -29,6 +29,7 @@ public class TunerUtils {
                 .iZone(talon::setIZone)
                 .setpoint(talon::getSetpoint)
                 .measurement(talon::getLastMeasurement)
+                .parameter("tolerance", talon::setTolerance)
                 .onPopulateFinished(talon)
                 .safeBuild();
     }

@@ -28,6 +28,8 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
     private Dim internalEncoderUnits;
     protected final VDim internalEncoderVelocity;
 
+    private double errorTolerance = 0.05;
+
     @SuppressWarnings("unchecked")
     public MoTalonFxPID(Type type, TalonFX controller, Dim internalEncoderUnits) {
         this.type = type;
@@ -82,6 +84,10 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         slotPIDConfigs.kA = kA;
     }
 
+    public void setTolerance(double tolerance) {
+        errorTolerance = tolerance;
+    }
+
     @Override
     public void onPopulateFinished() {
         applyConfigs();
@@ -111,6 +117,10 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         }
 
         return 0;
+    }
+
+    public boolean atSetpoint() {
+        return Math.abs(getSetpoint() - getLastMeasurement()) < errorTolerance;
     }
 
     /**
