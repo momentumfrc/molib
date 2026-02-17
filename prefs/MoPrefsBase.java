@@ -60,6 +60,10 @@ public abstract class MoPrefsBase {
         return new AngularVelocityUnitPref(key, Units.RotationsPerSecond, defaultValue);
     }
 
+    protected static AngularVelocityUnitPref degreesPerSecPref(String key, AngularVelocity defaultValue) {
+        return new AngularVelocityUnitPref(key, Units.DegreesPerSecond, defaultValue);
+    }
+
     protected static TimeUnitPref secondsPref(String key, Time defaultValue) {
         return new TimeUnitPref(key, Units.Seconds, defaultValue);
     }
@@ -72,9 +76,12 @@ public abstract class MoPrefsBase {
         return new LinearAccelerationUnitPref(key, Units.MetersPerSecondPerSecond, defaultValue);
     }
 
-    protected static AngularAccelerationUnitPref rotationsPerSecPerSecPref(
-            String key, AngularAcceleration defaultValue) {
+    protected static AngularAccelerationUnitPref rotationsPerSec2Pref(String key, AngularAcceleration defaultValue) {
         return new AngularAccelerationUnitPref(key, Units.RotationsPerSecondPerSecond, defaultValue);
+    }
+
+    protected static AngularAccelerationUnitPref degreesPerSec2Pref(String key, AngularAcceleration defaultValue) {
+        return new AngularAccelerationUnitPref(key, Units.DegreesPerSecondPerSecond, defaultValue);
     }
 
     protected static UnitPref<PerUnit<DimensionlessUnit, DistanceUnit>> encoderTicksPerCentimeterPref(
