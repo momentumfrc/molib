@@ -5,6 +5,7 @@ import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Unit;
 import frc.robot.molib.pid.MoSparkMaxPID;
 import frc.robot.molib.pid.MoTalonFxPID;
+import frc.robot.molib.pid.MoTalonFxProfilePID;
 import java.util.Optional;
 
 public class TunerUtils {
@@ -26,10 +27,25 @@ public class TunerUtils {
         return MoTuner.builder(name)
                 .pid(talon)
                 .motorFF(talon)
-                .iZone(talon::setIZone)
                 .setpoint(talon::getSetpoint)
                 .measurement(talon::getLastMeasurement)
                 .parameter("tolerance", talon::setTolerance)
+                .stateVariable("at_setpoint", () -> talon.atSetpoint() ? 1.0 : 0.0)
+                .onPopulateFinished(talon)
+                .safeBuild();
+    }
+
+    public static <Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> Optional<MoTuner> forMoTalonFxProfile(
+            MoTalonFxProfilePID<Dim, VDim> talon, String name) {
+        return MoTuner.builder(name)
+                .pid(talon)
+                .motorFF(talon)
+                .parameter("tolerance", talon::setTolerance)
+                .stateVariable("setpoint_pos", talon::getPositionSetpoint)
+                .stateVariable("setpoint_vel", talon::getVelocitySetpoint)
+                .stateVariable("measurement_pos", talon::getPositionMeasurement)
+                .stateVariable("measurement_vel", talon::getVelocityMeasurement)
+                .stateVariable("at_setpoint", () -> talon.atSetpoint() ? 1.0 : 0.0)
                 .onPopulateFinished(talon)
                 .safeBuild();
     }
