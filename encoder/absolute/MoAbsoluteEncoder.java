@@ -22,6 +22,10 @@ public class MoAbsoluteEncoder {
         measure = Units.Rotations.mutable(0);
     }
 
+    public MoRotationEncoder getMoEncoder() {
+        return encoder;
+    }
+
     public void setEncoderZero(Angle zero) {
         this.encoderZero = zero;
     }

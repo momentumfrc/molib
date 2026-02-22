@@ -20,6 +20,10 @@ public class DIOAbsEncoder implements MoEncoder.Encoder {
         encoder.setAssumedFrequency(1000000.0 / 1025.0);
     }
 
+    public DutyCycleEncoder getEncoder() {
+        return encoder;
+    }
+
     @Override
     public double getPosition() {
         return positionFactor * encoder.get();
