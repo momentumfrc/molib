@@ -88,6 +88,11 @@ public class VernierEncoder {
             if (Math.abs(guess1 - guess2) < 1e-3) {
                 return measurement.mut_replace(applyWraparoundRange(guess1), Units.Rotations);
             }
+            if (guess1 < guess2) {
+                revolutions1 += 1;
+            } else {
+                revolutions2 += 1;
+            }
         }
 
         DriverStation.reportError("failed to solve vernier encoder", true);
