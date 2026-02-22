@@ -4,6 +4,7 @@ import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.MutAngle;
 import edu.wpi.first.wpilibj.DriverStation;
+import java.util.Optional;
 
 public class VernierEncoder {
     private final MoAbsoluteEncoder encoder1;
@@ -72,7 +73,7 @@ public class VernierEncoder {
         return value;
     }
 
-    public Angle getPosition() {
+    public Optional<Angle> getPosition() {
         double r1 = ratios.ratio1();
         double r2 = ratios.ratio2();
         double range = this.range.in(Units.Rotations);
@@ -86,7 +87,7 @@ public class VernierEncoder {
             double guess1 = r1 * (revolutions1 + measure1);
             double guess2 = r2 * (revolutions2 + measure2);
             if (Math.abs(guess1 - guess2) < 1e-3) {
-                return measurement.mut_replace(applyWraparoundRange(guess1), Units.Rotations);
+                return Optional.of(measurement.mut_replace(applyWraparoundRange(guess1), Units.Rotations));
             }
             if (guess1 < guess2) {
                 revolutions1 += 1;
@@ -95,7 +96,7 @@ public class VernierEncoder {
             }
         }
 
-        DriverStation.reportError("failed to solve vernier encoder", true);
-        return null;
+        DriverStation.reportError("failed to solve vernier encoder", false);
+        return Optional.empty();
     }
 }
