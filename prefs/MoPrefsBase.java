@@ -64,6 +64,10 @@ public abstract class MoPrefsBase {
         return new AngularVelocityUnitPref(key, Units.DegreesPerSecond, defaultValue);
     }
 
+    protected static AngularVelocityUnitPref rpmPref(String key, AngularVelocity defaultValue) {
+        return new AngularVelocityUnitPref(key, Units.RPM, defaultValue);
+    }
+
     protected static TimeUnitPref secondsPref(String key, Time defaultValue) {
         return new TimeUnitPref(key, Units.Seconds, defaultValue);
     }
