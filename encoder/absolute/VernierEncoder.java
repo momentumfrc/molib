@@ -86,7 +86,7 @@ public class VernierEncoder {
         while (revolutions1 * r1 < range && revolutions2 * r2 < range) {
             double guess1 = r1 * (revolutions1 + measure1);
             double guess2 = r2 * (revolutions2 + measure2);
-            if (Math.abs(guess1 - guess2) < 1e-3) {
+            if (Math.abs(guess1 - guess2) < 5e-3) {
                 return Optional.of(measurement.mut_replace(applyWraparoundRange(guess1), Units.Rotations));
             }
             if (guess1 < guess2) {
