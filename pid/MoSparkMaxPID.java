@@ -11,6 +11,7 @@ import edu.wpi.first.units.Unit;
 import frc.robot.molib.MoSparkConfigurator;
 import frc.robot.molib.encoder.MoEncoder;
 import frc.robot.molib.motune.MoTuner;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
@@ -103,6 +104,10 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
 
     public void setConfigOption(Consumer<SparkBaseConfig> op) {
         configurator.acceptWithoutPopulate(op);
+    }
+
+    public void setConfigOption(BiConsumer<SparkBaseConfig, ClosedLoopSlot> op) {
+        configurator.acceptWithoutPopulate(config -> op.accept(config, pidSlot));
     }
 
     @Override
