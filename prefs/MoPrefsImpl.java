@@ -32,7 +32,7 @@ public class MoPrefsImpl {
         if (cleaned) {
             DriverStation.reportError(
                     String.format("New pref [%s] added after cleanup - this pref will be reset at next boot", key),
-                    cleaned);
+                    false);
         }
         activeKeys.add(key);
         return backingTable.getEntry(key);
