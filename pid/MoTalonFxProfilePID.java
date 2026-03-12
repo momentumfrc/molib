@@ -1,6 +1,7 @@
 package frc.robot.molib.pid;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.units.Measure;
@@ -16,7 +17,7 @@ import frc.robot.molib.motune.MoTuner;
 public class MoTalonFxProfilePID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
     private final TalonFX motorController;
-    private final Slot0Configs slotPIDConfigs = new Slot0Configs();
+    private final TalonFXConfiguration config;
 
     private final Dim internalEncoderUnits;
     private final VDim internalEncoderVelocity;
@@ -26,52 +27,46 @@ public class MoTalonFxProfilePID<Dim extends Unit, VDim extends PerUnit<Dim, Tim
     private PositionVoltage controlRequest = new PositionVoltage(0);
 
     @SuppressWarnings("unchecked")
-    public MoTalonFxProfilePID(TalonFX controller, Dim internalEncoderUnits) {
+    public MoTalonFxProfilePID(TalonFX controller, Dim internalEncoderUnits, TalonFXConfiguration config) {
         this.motorController = controller;
-
-        // Load the motor controller's Slot 0 PID values into slotPIDConfigs
-        this.motorController.getConfigurator().refresh(slotPIDConfigs);
+        this.config = config;
 
         this.internalEncoderUnits = internalEncoderUnits;
         this.internalEncoderVelocity = (VDim) internalEncoderUnits.per(TalonFxEncoder.VELOCITY_BASE_UNIT);
     }
 
-    public Slot0Configs getConfigs() {
-        return slotPIDConfigs;
-    }
-
     public void applyConfigs() {
-        motorController.getConfigurator().apply(slotPIDConfigs);
+        motorController.getConfigurator().apply(config);
     }
 
     @Override
     public void setP(double kP) {
-        slotPIDConfigs.kP = kP;
+        config.Slot0.kP = kP;
     }
 
     @Override
     public void setI(double kI) {
-        slotPIDConfigs.kI = kI;
+        config.Slot0.kI = kI;
     }
 
     @Override
     public void setD(double kD) {
-        slotPIDConfigs.kD = kD;
+        config.Slot0.kD = kD;
     }
 
     @Override
     public void setS(double kS) {
-        slotPIDConfigs.kS = kS;
+        config.Slot0.kS = kS;
     }
 
     @Override
     public void setV(double kV) {
-        slotPIDConfigs.kV = kV;
+        config.Slot0.kV = kV;
     }
 
     @Override
     public void setA(double kA) {
-        slotPIDConfigs.kA = kA;
+        config.Slot0.kA = kA;
     }
 
     public void setTolerance(double tolerance) {
