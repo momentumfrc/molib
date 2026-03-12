@@ -1,5 +1,6 @@
 package frc.robot.molib.encoder;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
@@ -62,7 +63,7 @@ public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUni
         return new MoDistanceEncoder(new RevAnalogSensorEncoder(sensor, configurator), internalEncoderUnits);
     }
 
-    public static MoDistanceEncoder forTalonFx(TalonFX talon, DistanceUnit internalEncoderUnits) {
-        return new MoDistanceEncoder(new TalonFxEncoder(talon), internalEncoderUnits);
+    public static MoDistanceEncoder forTalonFx(TalonFX talon, DistanceUnit internalEncoderUnits, TalonFXConfiguration config) {
+        return new MoDistanceEncoder(new TalonFxEncoder(talon, config), internalEncoderUnits);
     }
 }

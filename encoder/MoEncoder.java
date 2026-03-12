@@ -1,5 +1,6 @@
 package frc.robot.molib.encoder;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
@@ -156,7 +157,7 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
     }
 
     public static <Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> MoEncoder<Dim, VDim> forTalonFx(
-            TalonFX talon, Dim internalEncoderUnits) {
-        return new MoEncoder<Dim, VDim>(new TalonFxEncoder(talon), internalEncoderUnits);
+            TalonFX talon, Dim internalEncoderUnits, TalonFXConfiguration config) {
+        return new MoEncoder<Dim, VDim>(new TalonFxEncoder(talon, config), internalEncoderUnits);
     }
 }

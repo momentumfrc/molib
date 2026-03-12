@@ -1,6 +1,7 @@
 package frc.robot.molib.encoder;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.units.TimeUnit;
 import edu.wpi.first.units.Units;
@@ -9,13 +10,15 @@ public class TalonFxEncoder implements MoEncoder.Encoder {
     public static final TimeUnit VELOCITY_BASE_UNIT = Units.Seconds;
 
     private final TalonFX talon;
+    private final TalonFXConfiguration config;
 
     private boolean inverted = false;
     private double lastSetPosFactor = 0;
 
-    public TalonFxEncoder(TalonFX talon) {
+    public TalonFxEncoder(TalonFX talon, TalonFXConfiguration config) {
+        this.config = config;
         talon.getConfigurator()
-                .apply(new FeedbackConfigs().withRotorToSensorRatio(1).withSensorToMechanismRatio(1));
+                .apply(config.Feedback.withRotorToSensorRatio(1).withSensorToMechanismRatio(1));
         this.talon = talon;
     }
 
@@ -38,7 +41,7 @@ public class TalonFxEncoder implements MoEncoder.Encoder {
     public void setPositionFactor(double factor) {
         lastSetPosFactor = factor;
         double dir = this.inverted ? -1 : 1;
-        talon.getConfigurator().apply(new FeedbackConfigs().withSensorToMechanismRatio(1 / (dir * lastSetPosFactor)));
+        talon.getConfigurator().apply(config.Feedback.withSensorToMechanismRatio(1 / (dir * lastSetPosFactor)));
     }
 
     @Override
@@ -50,6 +53,6 @@ public class TalonFxEncoder implements MoEncoder.Encoder {
     public void setInverted(boolean inverted) {
         this.inverted = inverted;
         double dir = this.inverted ? -1 : 1;
-        talon.getConfigurator().apply(new FeedbackConfigs().withSensorToMechanismRatio(1 / (dir * lastSetPosFactor)));
+        talon.getConfigurator().apply(config.Feedback.withSensorToMechanismRatio(1 / (dir * lastSetPosFactor)));
     }
 }

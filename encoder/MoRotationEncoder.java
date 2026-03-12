@@ -1,5 +1,6 @@
 package frc.robot.molib.encoder;
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
@@ -59,8 +60,8 @@ public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit>
         return new MoRotationEncoder(new RevAnalogSensorEncoder(sensor, configurator), internalEncoderUnits);
     }
 
-    public static MoRotationEncoder forTalonFx(TalonFX talon, AngleUnit internalEncoderUnits) {
-        return new MoRotationEncoder(new TalonFxEncoder(talon), internalEncoderUnits);
+    public static MoRotationEncoder forTalonFx(TalonFX talon, AngleUnit internalEncoderUnits, TalonFXConfiguration config) {
+        return new MoRotationEncoder(new TalonFxEncoder(talon, config), internalEncoderUnits);
     }
 
     public static MoRotationEncoder forDioAbsolute(int dioPort) {
