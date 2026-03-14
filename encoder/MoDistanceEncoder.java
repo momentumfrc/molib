@@ -63,7 +63,8 @@ public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUni
         return new MoDistanceEncoder(new RevAnalogSensorEncoder(sensor, configurator), internalEncoderUnits);
     }
 
-    public static MoDistanceEncoder forTalonFx(TalonFX talon, DistanceUnit internalEncoderUnits, TalonFXConfiguration config) {
+    public static MoDistanceEncoder forTalonFx(
+            TalonFX talon, DistanceUnit internalEncoderUnits, TalonFXConfiguration config) {
         return new MoDistanceEncoder(new TalonFxEncoder(talon, config), internalEncoderUnits);
     }
 }

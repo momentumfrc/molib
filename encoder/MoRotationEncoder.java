@@ -60,7 +60,8 @@ public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit>
         return new MoRotationEncoder(new RevAnalogSensorEncoder(sensor, configurator), internalEncoderUnits);
     }
 
-    public static MoRotationEncoder forTalonFx(TalonFX talon, AngleUnit internalEncoderUnits, TalonFXConfiguration config) {
+    public static MoRotationEncoder forTalonFx(
+            TalonFX talon, AngleUnit internalEncoderUnits, TalonFXConfiguration config) {
         return new MoRotationEncoder(new TalonFxEncoder(talon, config), internalEncoderUnits);
     }
 

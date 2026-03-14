@@ -1,6 +1,5 @@
 package frc.robot.molib.encoder;
 
-import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.units.TimeUnit;
@@ -17,8 +16,7 @@ public class TalonFxEncoder implements MoEncoder.Encoder {
 
     public TalonFxEncoder(TalonFX talon, TalonFXConfiguration config) {
         this.config = config;
-        talon.getConfigurator()
-                .apply(config.Feedback.withRotorToSensorRatio(1).withSensorToMechanismRatio(1));
+        talon.getConfigurator().apply(config.Feedback.withRotorToSensorRatio(1).withSensorToMechanismRatio(1));
         this.talon = talon;
     }
 
