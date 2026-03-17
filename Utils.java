@@ -6,7 +6,12 @@ import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.PerUnit;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Time;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.molib.encoder.MoRotationEncoder;
+import java.util.Set;
+import java.util.function.Supplier;
 
 public class Utils {
     private static final double ENCODER_ZERO_ZONE = 0.2;
@@ -32,6 +37,16 @@ public class Utils {
         }
 
         return Math.signum(val) * Math.pow(Math.abs(val), curve);
+    }
+
+    /**
+     * Decorates the provided command with a timeout. If the specified timeout is exceeded before the command
+     * finishes normally, the command will be interrupted and un-scheduled.
+     * <p>
+     * The timeout is retrieved when the command is scheduled.
+     */
+    public static Command withTimeoutPref(Command command, Supplier<Time> timeoutSupplier) {
+        return command.raceWith(Commands.defer(() -> Commands.waitTime(timeoutSupplier.get()), Set.of()));
     }
 
     private Utils() {
