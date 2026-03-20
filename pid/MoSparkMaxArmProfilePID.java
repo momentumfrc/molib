@@ -115,6 +115,14 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
         lastFF = ff;
     }
 
+    public void setUnprofiledPositionReference(Measure<AngleUnit> position) {
+        double ff = calculateFF(Units.RadiansPerSecond.zero());
+        double setpoint = position.in(internalEncoder.getInternalEncoderUnits());
+        pidController.setSetpoint(setpoint, type.innerType, pidSlot, ff);
+        lastSetpoint = setpoint;
+        lastFF = ff;
+    }
+
     @Override
     public void setVelocityReference(Measure<AngularVelocityUnit> velocity) {
         throw new UnsupportedOperationException("MoSparkMaxArmProfilePID only supports position references");
