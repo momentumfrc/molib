@@ -1,9 +1,9 @@
-package frc.robot.molib.encoder;
+package first.molib.encoder;
 
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Units;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Units;
 import java.util.function.Consumer;
 
 public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
@@ -21,7 +21,7 @@ public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getPosition() {
-        return sensor.getPosition();
+        return sensor.getPosition().get();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getVelocity() {
-        return sensor.getVelocity();
+        return sensor.getVelocity().get();
     }
 
     @Override

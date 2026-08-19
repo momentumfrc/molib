@@ -1,4 +1,4 @@
-package frc.robot.molib.encoder;
+package first.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -7,11 +7,11 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import edu.wpi.first.units.DistanceUnit;
-import edu.wpi.first.units.LinearVelocityUnit;
-import edu.wpi.first.units.measure.Distance;
-import edu.wpi.first.units.measure.LinearVelocity;
-import frc.robot.molib.MoSparkConfigurator;
+import org.wpilib.units.DistanceUnit;
+import org.wpilib.units.LinearVelocityUnit;
+import org.wpilib.units.measure.Distance;
+import org.wpilib.units.measure.LinearVelocity;
+import first.molib.MoSparkConfigurator;
 import java.util.function.Consumer;
 
 public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUnit> {

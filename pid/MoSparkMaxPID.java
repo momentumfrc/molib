@@ -1,16 +1,16 @@
-package frc.robot.molib.pid;
+package first.molib.pid;
 
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Unit;
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.encoder.MoEncoder;
-import frc.robot.molib.motune.MoTuner;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
+import first.molib.MoSparkConfigurator;
+import first.molib.encoder.MoEncoder;
+import first.molib.motune.MoTuner;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -116,7 +116,8 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
     }
 
     public double getLastOutput() {
-        return this.motorController.get();
+        //check this, I wasn't sure which one to do. Before it was motorController.get()
+        return this.motorController.getThrottle();
     }
 
     /**

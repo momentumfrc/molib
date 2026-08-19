@@ -1,4 +1,4 @@
-package frc.robot.molib;
+package first.molib;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
@@ -8,7 +8,9 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.wpilibj.DriverStation;
+import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -27,7 +29,7 @@ public class MoSparkConfigurator implements Consumer<Consumer<SparkBaseConfig>> 
     }
 
     public static void persistAllParameters() {
-        DriverStation.reportWarning("Persisting spark configurations", false);
+        DriverStationErrors.reportWarning("Persisting spark configurations", false);
         for (MoSparkConfigurator c : instances.values()) {
             c.persistConfiguration();
         }

@@ -1,12 +1,14 @@
-package frc.robot.molib.prefs;
+package first.molib.prefs;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.networktables.StringPublisher;
-import edu.wpi.first.networktables.StringTopic;
-import edu.wpi.first.networktables.Topic;
-import edu.wpi.first.wpilibj.DriverStation;
+import org.wpilib.networktables.NetworkTable;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableInstance;
+import org.wpilib.networktables.StringPublisher;
+import org.wpilib.networktables.StringTopic;
+import org.wpilib.networktables.Topic;
+import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +32,7 @@ public class MoPrefsImpl {
 
     NetworkTableEntry getEntry(String key) {
         if (cleaned) {
-            DriverStation.reportError(
+            DriverStationErrors.reportError(
                     String.format("New pref [%s] added after cleanup - this pref will be reset at next boot", key),
                     false);
         }
@@ -66,7 +68,7 @@ public class MoPrefsImpl {
         String kSmartDashboardType = "RobotPreferences";
         typePublisher = backingTable
                 .getStringTopic(".type")
-                .publishEx(StringTopic.kTypeString, "{\"SmartDashboard\":\"" + kSmartDashboardType + "\"}");
+                .publishEx(StringTopic.TYPE_STRING, "{\"SmartDashboard\":\"" + kSmartDashboardType + "\"}");
         typePublisher.set(kSmartDashboardType);
     }
 }

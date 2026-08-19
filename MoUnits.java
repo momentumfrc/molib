@@ -1,10 +1,10 @@
-package frc.robot.molib;
+package first.molib;
 
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.DimensionlessUnit;
-import edu.wpi.first.units.DistanceUnit;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.Units;
+import org.wpilib.units.AngleUnit;
+import org.wpilib.units.DimensionlessUnit;
+import org.wpilib.units.DistanceUnit;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.Units;
 
 public class MoUnits {
     private MoUnits() {

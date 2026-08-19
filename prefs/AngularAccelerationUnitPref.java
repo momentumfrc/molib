@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.molib.prefs;
 
-import edu.wpi.first.units.AngularAccelerationUnit;
-import edu.wpi.first.units.measure.AngularAcceleration;
+import org.wpilib.units.AngularAccelerationUnit;
+import org.wpilib.units.measure.AngularAcceleration;
 
 public class AngularAccelerationUnitPref extends UnitPref<AngularAccelerationUnit> {
     public AngularAccelerationUnitPref(

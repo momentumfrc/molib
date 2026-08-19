@@ -1,4 +1,4 @@
-package frc.robot.molib.encoder;
+package first.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -7,14 +7,13 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import edu.wpi.first.units.DimensionlessUnit;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.MutableMeasure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Unit;
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.MoUnits;
+import org.wpilib.units.DimensionlessUnit;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
+import first.molib.MoSparkConfigurator;
+import first.molib.MoUnits;
 import java.util.function.Consumer;
 
 /**
@@ -62,17 +61,12 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
      */
     private final VDim internalEncoderVelocityUnits;
 
-    private final MutableMeasure<Dim, ?, ?> mut_pos;
-    private final MutableMeasure<VDim, ?, ?> mut_vel;
-
     @SuppressWarnings("unchecked")
     MoEncoder(Encoder encoder, Dim internalEncoderUnits) {
         this.encoder = encoder;
         this.internalEncoderUnits = internalEncoderUnits;
         this.internalEncoderVelocityUnits = (VDim) internalEncoderUnits.per(encoder.getVelocityBaseUnit());
 
-        mut_pos = (MutableMeasure<Dim, ?, ?>) internalEncoderUnits.mutable(0);
-        mut_vel = (MutableMeasure<VDim, ?, ?>) internalEncoderVelocityUnits.mutable(0);
     }
 
     public Dim getInternalEncoderUnits() {
@@ -102,7 +96,8 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
     }
 
     public Measure<Dim> getPosition() {
-        return mut_pos.mut_replace(encoder.getPosition(), internalEncoderUnits);
+        //I think this cast is necessary, it might not be.
+        return (Measure<Dim>) internalEncoderUnits.of(getPositionInEncoderUnits());
     }
 
     public void setPosition(Measure<Dim> position) {
@@ -110,7 +105,8 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
     }
 
     public Measure<VDim> getVelocity() {
-        return mut_vel.mut_replace(encoder.getVelocity(), internalEncoderVelocityUnits);
+        //same thing with the cast
+        return (Measure<VDim>) internalEncoderVelocityUnits.of(encoder.getVelocity());
     }
 
     public double getPositionInEncoderUnits() {

@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.molib.prefs;
 
-import edu.wpi.first.units.DistanceUnit;
-import edu.wpi.first.units.measure.Distance;
+import org.wpilib.units.DistanceUnit;
+import org.wpilib.units.measure.Distance;
 
 public class DistanceUnitPref extends UnitPref<DistanceUnit> {
     public DistanceUnitPref(String key, DistanceUnit storeUnits, Distance defaultValue) {

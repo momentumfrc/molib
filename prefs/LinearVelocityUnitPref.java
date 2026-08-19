@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.molib.prefs;
 
-import edu.wpi.first.units.LinearVelocityUnit;
-import edu.wpi.first.units.measure.LinearVelocity;
+import org.wpilib.units.LinearVelocityUnit;
+import org.wpilib.units.measure.LinearVelocity;
 
 public class LinearVelocityUnitPref extends UnitPref<LinearVelocityUnit> {
     public LinearVelocityUnitPref(String key, LinearVelocityUnit storeUnits, LinearVelocity defaultValue) {

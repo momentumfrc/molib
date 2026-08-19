@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.molib.prefs;
 
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.Unit;
+import org.wpilib.units.Measure;
+import org.wpilib.units.Unit;
 import java.util.function.BiConsumer;
 
 public class MoPrefsUtils {

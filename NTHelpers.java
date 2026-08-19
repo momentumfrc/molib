@@ -1,13 +1,13 @@
-package frc.robot.molib;
+package first.molib;
 
-import edu.wpi.first.networktables.BooleanEntry;
-import edu.wpi.first.networktables.DoubleEntry;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilderImpl;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.wpilib.networktables.BooleanEntry;
+import org.wpilib.networktables.DoubleEntry;
+import org.wpilib.networktables.NetworkTable;
+import org.wpilib.networktables.NetworkTableInstance;
+import org.wpilib.util.sendable.Sendable;
+import org.wpilib.util.sendable.SendableRegistry;
+import org.wpilib.smartdashboard.SendableBuilderImpl;
+import org.wpilib.smartdashboard.SendableChooser;
 import java.util.HashMap;
 import java.util.Map;
 

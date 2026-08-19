@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.molib.pid;
+package first.molib.pid;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.ControlRequest;
@@ -10,13 +10,15 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Unit;
-import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.molib.encoder.TalonFxEncoder;
-import frc.robot.molib.motune.MoTuner;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
+import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
+
+import first.molib.encoder.TalonFxEncoder;
+import first.molib.motune.MoTuner;
 
 public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
@@ -95,7 +97,7 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
 
     public void setIZone(double iZone) {
         if (iZone != 0) {
-            DriverStation.reportError("Cannot set iZone on TalonFx, it is not supported by the Phoenix API", true);
+            DriverStationErrors.reportError("Cannot set iZone on TalonFx, it is not supported by the Phoenix API", true);
         }
     }
 
