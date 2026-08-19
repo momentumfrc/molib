@@ -1,4 +1,4 @@
-package first.molib;
+package first.robot.molib;
 
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.DimensionlessUnit;

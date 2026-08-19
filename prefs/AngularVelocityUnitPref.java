@@ -1,4 +1,4 @@
-package first.molib.prefs;
+package first.robot.molib.prefs;
 
 import org.wpilib.units.AngularVelocityUnit;
 import org.wpilib.units.measure.AngularVelocity;

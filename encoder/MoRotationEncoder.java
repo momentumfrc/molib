@@ -1,4 +1,4 @@
-package first.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -7,7 +7,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import first.molib.MoSparkConfigurator;
+import first.robot.molib.MoSparkConfigurator;
 import java.util.function.Consumer;
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.AngularVelocityUnit;

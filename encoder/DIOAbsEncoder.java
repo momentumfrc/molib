@@ -1,4 +1,4 @@
-package first.molib.encoder;
+package first.robot.molib.encoder;
 
 import org.wpilib.hardware.rotation.DutyCycleEncoder;
 import org.wpilib.units.TimeUnit;

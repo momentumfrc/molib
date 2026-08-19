@@ -1,4 +1,4 @@
-package first.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.spark.config.SparkBaseConfig;

@@ -1,4 +1,4 @@
-package first.molib.prefs;
+package first.robot.molib.prefs;
 
 import java.util.EnumSet;
 import java.util.function.BiFunction;

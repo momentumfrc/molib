@@ -1,4 +1,4 @@
-package first.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.config.SparkBaseConfig;

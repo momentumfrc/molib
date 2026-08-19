@@ -1,4 +1,4 @@
-package first.molib;
+package first.robot.molib;
 
 import java.util.HashMap;
 import java.util.Map;

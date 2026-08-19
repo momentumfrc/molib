@@ -1,6 +1,6 @@
-package first.molib.prefs;
+package first.robot.molib.prefs;
 
-import first.molib.MoUnits;
+import first.robot.molib.MoUnits;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableValue;
 import org.wpilib.units.AngleUnit;

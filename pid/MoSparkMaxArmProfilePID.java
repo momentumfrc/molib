@@ -1,9 +1,9 @@
-package first.molib.pid;
+package first.robot.molib.pid;
 
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
-import first.molib.MoSparkConfigurator;
-import first.molib.encoder.MoEncoder;
+import first.robot.molib.MoSparkConfigurator;
+import first.robot.molib.encoder.MoEncoder;
 import org.wpilib.math.controller.ArmFeedforward;
 import org.wpilib.math.trajectory.TrapezoidProfile;
 import org.wpilib.units.AngleUnit;

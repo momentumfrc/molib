@@ -1,6 +1,6 @@
-package first.molib;
+package first.robot.molib;
 
-import first.molib.encoder.MoRotationEncoder;
+import first.robot.molib.encoder.MoRotationEncoder;
 import java.util.Set;
 import java.util.function.Supplier;
 import org.wpilib.command2.Command;

@@ -1,4 +1,4 @@
-package first.molib.encoder.absolute;
+package first.robot.molib.encoder.absolute;
 
 import java.util.Optional;
 import org.wpilib.driverstation.DriverStationErrors;

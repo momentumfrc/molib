@@ -1,10 +1,10 @@
-package first.molib.pid;
+package first.robot.molib.pid;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import first.molib.encoder.TalonFxEncoder;
-import first.molib.motune.MoTuner;
+import first.robot.molib.encoder.TalonFxEncoder;
+import first.robot.molib.motune.MoTuner;
 import org.wpilib.units.Measure;
 import org.wpilib.units.PerUnit;
 import org.wpilib.units.TimeUnit;

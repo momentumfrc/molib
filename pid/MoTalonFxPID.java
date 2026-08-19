@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package first.molib.pid;
+package first.robot.molib.pid;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.ControlRequest;
@@ -10,8 +10,8 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import first.molib.encoder.TalonFxEncoder;
-import first.molib.motune.MoTuner;
+import first.robot.molib.encoder.TalonFxEncoder;
+import first.robot.molib.motune.MoTuner;
 import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.units.Measure;
 import org.wpilib.units.PerUnit;

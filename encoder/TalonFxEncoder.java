@@ -1,4 +1,4 @@
-package first.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;

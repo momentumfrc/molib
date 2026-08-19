@@ -1,4 +1,4 @@
-package first.molib;
+package first.robot.molib;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
