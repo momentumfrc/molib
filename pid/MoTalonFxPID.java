@@ -10,15 +10,13 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import first.molib.encoder.TalonFxEncoder;
+import first.molib.motune.MoTuner;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.units.Measure;
 import org.wpilib.units.PerUnit;
 import org.wpilib.units.TimeUnit;
 import org.wpilib.units.Unit;
-import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStationErrors;
-
-import first.molib.encoder.TalonFxEncoder;
-import first.molib.motune.MoTuner;
 
 public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
         implements MoTuner.PIDController, MoTuner.MotorFF, MoTuner.OnPopulateFinished {
@@ -97,7 +95,8 @@ public class MoTalonFxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>>
 
     public void setIZone(double iZone) {
         if (iZone != 0) {
-            DriverStationErrors.reportError("Cannot set iZone on TalonFx, it is not supported by the Phoenix API", true);
+            DriverStationErrors.reportError(
+                    "Cannot set iZone on TalonFx, it is not supported by the Phoenix API", true);
         }
     }
 

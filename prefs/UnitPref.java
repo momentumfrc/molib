@@ -1,10 +1,10 @@
 package first.molib.prefs;
 
+import java.util.function.Consumer;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableValue;
 import org.wpilib.units.Measure;
 import org.wpilib.units.Unit;
-import java.util.function.Consumer;
 
 public class UnitPref<U extends Unit> {
     private final Pref<Double> basePref;

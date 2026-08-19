@@ -1,10 +1,10 @@
 package first.molib.encoder.absolute;
 
 import com.revrobotics.spark.SparkBase;
+import first.molib.encoder.MoRotationEncoder;
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.Units;
 import org.wpilib.units.measure.Angle;
-import first.molib.encoder.MoRotationEncoder;
 
 public class MoAbsoluteEncoder {
     private final MoRotationEncoder encoder;

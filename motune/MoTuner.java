@@ -1,14 +1,5 @@
 package first.molib.motune;
 
-import org.wpilib.networktables.DoublePublisher;
-import org.wpilib.networktables.NetworkTable;
-import org.wpilib.networktables.NetworkTableEntry;
-import org.wpilib.networktables.NetworkTableEvent;
-import org.wpilib.networktables.NetworkTableEvent.Kind;
-import org.wpilib.networktables.NetworkTableInstance;
-import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStationErrors;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -18,6 +9,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
+import org.wpilib.driverstation.DriverStationErrors;
+import org.wpilib.networktables.DoublePublisher;
+import org.wpilib.networktables.NetworkTable;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableEvent;
+import org.wpilib.networktables.NetworkTableEvent.Kind;
+import org.wpilib.networktables.NetworkTableInstance;
 
 /**
  * Utility class for storing controller parameters and state values in NetworkTables.
@@ -192,7 +190,8 @@ public class MoTuner implements NetworkTable.TableEventListener {
             try {
                 return Optional.of(build());
             } catch (Exception e) {
-                DriverStationErrors.reportError("Failed to build tuner for controller [" + name + "]", e.getStackTrace());
+                DriverStationErrors.reportError(
+                        "Failed to build tuner for controller [" + name + "]", e.getStackTrace());
                 return Optional.empty();
             }
         }

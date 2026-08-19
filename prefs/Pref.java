@@ -1,12 +1,12 @@
 package first.molib.prefs;
 
-import org.wpilib.networktables.NetworkTableEntry;
-import org.wpilib.networktables.NetworkTableEvent;
-import org.wpilib.networktables.NetworkTableValue;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableEvent;
+import org.wpilib.networktables.NetworkTableValue;
 
 public class Pref<T> {
     public final String key;

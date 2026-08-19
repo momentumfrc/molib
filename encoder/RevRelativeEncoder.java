@@ -2,9 +2,9 @@ package first.molib.encoder;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import java.util.function.Consumer;
 import org.wpilib.units.TimeUnit;
 import org.wpilib.units.Units;
-import java.util.function.Consumer;
 
 public class RevRelativeEncoder implements MoEncoder.Encoder {
     public static final TimeUnit VELOCITY_BASE_UNIT = Units.Minute;

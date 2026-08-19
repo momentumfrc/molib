@@ -8,12 +8,10 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStationErrors;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.wpilib.driverstation.DriverStationErrors;
 
 public class MoSparkConfigurator implements Consumer<Consumer<SparkBaseConfig>> {
     private final SparkBase spark;

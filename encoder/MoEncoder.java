@@ -7,14 +7,14 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import first.molib.MoSparkConfigurator;
+import first.molib.MoUnits;
+import java.util.function.Consumer;
 import org.wpilib.units.DimensionlessUnit;
 import org.wpilib.units.Measure;
 import org.wpilib.units.PerUnit;
 import org.wpilib.units.TimeUnit;
 import org.wpilib.units.Unit;
-import first.molib.MoSparkConfigurator;
-import first.molib.MoUnits;
-import java.util.function.Consumer;
 
 /**
  * Wraps an encoder, keeping track of the encoder's internal units.
@@ -66,7 +66,6 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
         this.encoder = encoder;
         this.internalEncoderUnits = internalEncoderUnits;
         this.internalEncoderVelocityUnits = (VDim) internalEncoderUnits.per(encoder.getVelocityBaseUnit());
-
     }
 
     public Dim getInternalEncoderUnits() {
@@ -96,7 +95,7 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
     }
 
     public Measure<Dim> getPosition() {
-        //I think this cast is necessary, it might not be.
+        // I think this cast is necessary, it might not be.
         return (Measure<Dim>) internalEncoderUnits.of(getPositionInEncoderUnits());
     }
 
@@ -105,7 +104,7 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
     }
 
     public Measure<VDim> getVelocity() {
-        //same thing with the cast
+        // same thing with the cast
         return (Measure<VDim>) internalEncoderVelocityUnits.of(encoder.getVelocity());
     }
 

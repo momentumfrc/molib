@@ -1,11 +1,9 @@
 package first.molib.encoder.absolute;
 
+import java.util.Optional;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.units.Units;
 import org.wpilib.units.measure.Angle;
-import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStationErrors;
-
-import java.util.Optional;
 
 public class VernierEncoder {
     private final MoAbsoluteEncoder encoder1;

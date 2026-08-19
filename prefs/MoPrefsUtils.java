@@ -1,8 +1,8 @@
 package first.molib.prefs;
 
+import java.util.function.BiConsumer;
 import org.wpilib.units.Measure;
 import org.wpilib.units.Unit;
-import java.util.function.BiConsumer;
 
 public class MoPrefsUtils {
 

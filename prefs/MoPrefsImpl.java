@@ -1,16 +1,14 @@
 package first.molib.prefs;
 
+import java.util.HashSet;
+import java.util.Set;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.networktables.NetworkTable;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableInstance;
 import org.wpilib.networktables.StringPublisher;
 import org.wpilib.networktables.StringTopic;
 import org.wpilib.networktables.Topic;
-import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStationErrors;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Singleton class holding a reference to the NetworkTable backing the MoPrefs.

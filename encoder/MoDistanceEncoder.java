@@ -7,12 +7,12 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import first.molib.MoSparkConfigurator;
+import java.util.function.Consumer;
 import org.wpilib.units.DistanceUnit;
 import org.wpilib.units.LinearVelocityUnit;
 import org.wpilib.units.measure.Distance;
 import org.wpilib.units.measure.LinearVelocity;
-import first.molib.MoSparkConfigurator;
-import java.util.function.Consumer;
 
 public class MoDistanceEncoder extends MoEncoder<DistanceUnit, LinearVelocityUnit> {
     MoDistanceEncoder(Encoder encoder, DistanceUnit internalEncoderUnits) {

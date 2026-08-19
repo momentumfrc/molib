@@ -3,12 +3,12 @@ package first.molib.pid;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import first.molib.encoder.TalonFxEncoder;
+import first.molib.motune.MoTuner;
 import org.wpilib.units.Measure;
 import org.wpilib.units.PerUnit;
 import org.wpilib.units.TimeUnit;
 import org.wpilib.units.Unit;
-import first.molib.encoder.TalonFxEncoder;
-import first.molib.motune.MoTuner;
 
 /**
  * A MoTalonFxPID specialized for following trapezoidal trajectories.

@@ -7,13 +7,13 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import first.molib.MoSparkConfigurator;
+import java.util.function.Consumer;
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.AngularVelocityUnit;
 import org.wpilib.units.Units;
 import org.wpilib.units.measure.Angle;
 import org.wpilib.units.measure.AngularVelocity;
-import first.molib.MoSparkConfigurator;
-import java.util.function.Consumer;
 
 public class MoRotationEncoder extends MoEncoder<AngleUnit, AngularVelocityUnit> {
     MoRotationEncoder(Encoder encoder, AngleUnit internalEncoderUnits) {

@@ -1,15 +1,15 @@
 package first.molib;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.wpilib.networktables.BooleanEntry;
 import org.wpilib.networktables.DoubleEntry;
 import org.wpilib.networktables.NetworkTable;
 import org.wpilib.networktables.NetworkTableInstance;
-import org.wpilib.util.sendable.Sendable;
-import org.wpilib.util.sendable.SendableRegistry;
 import org.wpilib.smartdashboard.SendableBuilderImpl;
 import org.wpilib.smartdashboard.SendableChooser;
-import java.util.HashMap;
-import java.util.Map;
+import org.wpilib.util.sendable.Sendable;
+import org.wpilib.util.sendable.SendableRegistry;
 
 public class NTHelpers {
 

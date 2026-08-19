@@ -1,5 +1,6 @@
 package first.molib.prefs;
 
+import first.molib.MoUnits;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableValue;
 import org.wpilib.units.AngleUnit;
@@ -18,7 +19,6 @@ import org.wpilib.units.measure.Distance;
 import org.wpilib.units.measure.LinearAcceleration;
 import org.wpilib.units.measure.LinearVelocity;
 import org.wpilib.units.measure.Time;
-import first.molib.MoUnits;
 
 /**
  * Base class for robot preferences.

@@ -1,12 +1,12 @@
 package first.molib.motune;
 
-import org.wpilib.units.PerUnit;
-import org.wpilib.units.TimeUnit;
-import org.wpilib.units.Unit;
 import first.molib.pid.MoSparkMaxPID;
 import first.molib.pid.MoTalonFxPID;
 import first.molib.pid.MoTalonFxProfilePID;
 import java.util.Optional;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
 
 public class TunerUtils {
 

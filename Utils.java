@@ -1,5 +1,10 @@
 package first.molib;
 
+import first.molib.encoder.MoRotationEncoder;
+import java.util.Set;
+import java.util.function.Supplier;
+import org.wpilib.command2.Command;
+import org.wpilib.command2.Commands;
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.DimensionlessUnit;
 import org.wpilib.units.Measure;
@@ -7,11 +12,6 @@ import org.wpilib.units.PerUnit;
 import org.wpilib.units.Units;
 import org.wpilib.units.measure.Angle;
 import org.wpilib.units.measure.Time;
-import org.wpilib.command2.Command;
-import org.wpilib.command2.Commands;
-import first.molib.encoder.MoRotationEncoder;
-import java.util.Set;
-import java.util.function.Supplier;
 
 public class Utils {
     private static final double ENCODER_ZERO_ZONE = 0.2;

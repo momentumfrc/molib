@@ -2,6 +2,8 @@ package first.molib.pid;
 
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
+import first.molib.MoSparkConfigurator;
+import first.molib.encoder.MoEncoder;
 import org.wpilib.math.controller.ArmFeedforward;
 import org.wpilib.math.trajectory.TrapezoidProfile;
 import org.wpilib.units.AngleUnit;
@@ -11,8 +13,6 @@ import org.wpilib.units.Units;
 import org.wpilib.units.measure.Angle;
 import org.wpilib.units.measure.AngularAcceleration;
 import org.wpilib.units.measure.AngularVelocity;
-import first.molib.MoSparkConfigurator;
-import first.molib.encoder.MoEncoder;
 
 public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVelocityUnit> {
     private static final double REPATH_ERROR_DEGS = 15;

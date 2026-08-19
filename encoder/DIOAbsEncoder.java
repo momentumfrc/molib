@@ -1,8 +1,8 @@
 package first.molib.encoder;
 
+import org.wpilib.hardware.rotation.DutyCycleEncoder;
 import org.wpilib.units.TimeUnit;
 import org.wpilib.units.Units;
-import org.wpilib.hardware.rotation.DutyCycleEncoder;
 
 /**
  * Represents a REV through-bore absolute encoder attached to a DIO port on the RIO.
