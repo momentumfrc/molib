@@ -116,7 +116,6 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
     }
 
     public double getLastOutput() {
-        // check this, I wasn't sure which one to do. Before it was motorController.get()
         return this.motorController.getThrottle();
     }
 
