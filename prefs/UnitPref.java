@@ -10,12 +10,8 @@ public class UnitPref<U extends Unit> {
     private final Pref<Double> basePref;
     private final U storeUnits;
 
-    private Measure<U> currValue;
-
     public UnitPref(String key, U storeUnits, Measure<U> defaultValue) {
         String symbol = storeUnits.symbol().replaceAll("/", "_");
-
-        currValue = defaultValue;
 
         this.basePref = new Pref<>(
                 String.format("%s (%s)", key, symbol),
@@ -26,13 +22,9 @@ public class UnitPref<U extends Unit> {
         this.storeUnits = storeUnits;
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<U> get() {
-        return replace(basePref.get(), storeUnits);
-    }
-
-    public Measure<U> replace(double updated, U storeUnits) {
-        currValue = (Measure<U>) storeUnits.of(basePref.get());
-        return currValue;
+        return (Measure<U>) storeUnits.of(basePref.get());
     }
 
     public void set(Measure<U> value) {
@@ -43,8 +35,9 @@ public class UnitPref<U extends Unit> {
         subscribe(consumer, false);
     }
 
+    @SuppressWarnings("unchecked")
     public void subscribe(Consumer<Measure<U>> consumer, boolean notifyImmediately) {
-        basePref.subscribe((value) -> consumer.accept(replace(value, storeUnits)), notifyImmediately);
+        basePref.subscribe(value -> consumer.accept((Measure<U>) storeUnits.of(value)), notifyImmediately);
     }
 
     public String getKey() {
