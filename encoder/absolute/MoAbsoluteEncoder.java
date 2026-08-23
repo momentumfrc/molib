@@ -1,25 +1,21 @@
-package frc.robot.molib.encoder.absolute;
+package first.robot.molib.encoder.absolute;
 
 import com.revrobotics.spark.SparkBase;
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.Units;
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.MutAngle;
-import frc.robot.molib.encoder.MoRotationEncoder;
+import first.robot.molib.encoder.MoRotationEncoder;
+import org.wpilib.units.AngleUnit;
+import org.wpilib.units.Units;
+import org.wpilib.units.measure.Angle;
 
 public class MoAbsoluteEncoder {
     private final MoRotationEncoder encoder;
     private Angle encoderZero;
     private Angle encoderWraparoundRange;
 
-    private MutAngle measure;
-
     public MoAbsoluteEncoder(MoRotationEncoder encoder) {
         this.encoder = encoder;
 
         this.encoderZero = encoder.getInternalEncoderUnits().zero();
         this.encoderWraparoundRange = Units.Rotations.of(0.2);
-        measure = Units.Rotations.mutable(0);
     }
 
     public MoRotationEncoder getMoEncoder() {
@@ -42,7 +38,7 @@ public class MoAbsoluteEncoder {
         if (wrapRange > 0 && pos > (1 - wrapRange)) {
             pos -= 1;
         }
-        return measure.mut_replace(pos, Units.Rotations);
+        return Units.Rotations.of(pos);
     }
 
     public static MoAbsoluteEncoder forDio(int dioPort) {

@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.robot.molib.prefs;
 
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.measure.Time;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.measure.Time;
 
 public class TimeUnitPref extends UnitPref<TimeUnit> {
     public TimeUnitPref(String key, TimeUnit storeUnits, Time defaultValue) {

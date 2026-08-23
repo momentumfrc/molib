@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.robot.molib.prefs;
 
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.measure.Angle;
+import org.wpilib.units.AngleUnit;
+import org.wpilib.units.measure.Angle;
 
 public class AngleUnitPref extends UnitPref<AngleUnit> {
     public AngleUnitPref(String key, AngleUnit storeUnits, Angle defaultValue) {

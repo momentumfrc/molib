@@ -1,14 +1,14 @@
-package frc.robot.molib.pid;
+package first.robot.molib.pid;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Unit;
-import frc.robot.molib.encoder.TalonFxEncoder;
-import frc.robot.molib.motune.MoTuner;
+import first.robot.molib.encoder.TalonFxEncoder;
+import first.robot.molib.motune.MoTuner;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
 
 /**
  * A MoTalonFxPID specialized for following trapezoidal trajectories.

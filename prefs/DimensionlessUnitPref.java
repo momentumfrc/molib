@@ -1,7 +1,7 @@
-package frc.robot.molib.prefs;
+package first.robot.molib.prefs;
 
-import edu.wpi.first.units.DimensionlessUnit;
-import edu.wpi.first.units.measure.Dimensionless;
+import org.wpilib.units.DimensionlessUnit;
+import org.wpilib.units.measure.Dimensionless;
 
 public class DimensionlessUnitPref extends UnitPref<DimensionlessUnit> {
     public DimensionlessUnitPref(String key, DimensionlessUnit storeUnits, Dimensionless defaultValue) {

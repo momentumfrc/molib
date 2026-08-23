@@ -1,17 +1,17 @@
-package frc.robot.molib;
+package first.robot.molib;
 
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.DimensionlessUnit;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.Units;
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.Time;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.molib.encoder.MoRotationEncoder;
+import first.robot.molib.encoder.MoRotationEncoder;
 import java.util.Set;
 import java.util.function.Supplier;
+import org.wpilib.command2.Command;
+import org.wpilib.command2.Commands;
+import org.wpilib.units.AngleUnit;
+import org.wpilib.units.DimensionlessUnit;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.Units;
+import org.wpilib.units.measure.Angle;
+import org.wpilib.units.measure.Time;
 
 public class Utils {
     private static final double ENCODER_ZERO_ZONE = 0.2;

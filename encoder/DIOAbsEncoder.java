@@ -1,8 +1,8 @@
-package frc.robot.molib.encoder;
+package first.robot.molib.encoder;
 
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Units;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import org.wpilib.hardware.rotation.DutyCycleEncoder;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Units;
 
 /**
  * Represents a REV through-bore absolute encoder attached to a DIO port on the RIO.

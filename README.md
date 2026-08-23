@@ -8,7 +8,7 @@ robot projects.
 Add this project as a git submodule
 
 ```bash
-git submodule add git@github.com:momentumfrc/molib.git src/main/java/frc/robot/molib
+git submodule add git@github.com:momentumfrc/molib.git src/main/java/first/robot/molib
 ```
 
 

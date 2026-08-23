@@ -1,18 +1,15 @@
-package frc.robot.molib.encoder.absolute;
+package first.robot.molib.encoder.absolute;
 
-import edu.wpi.first.units.Units;
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.MutAngle;
-import edu.wpi.first.wpilibj.DriverStation;
 import java.util.Optional;
+import org.wpilib.driverstation.DriverStationErrors;
+import org.wpilib.units.Units;
+import org.wpilib.units.measure.Angle;
 
 public class VernierEncoder {
     private final MoAbsoluteEncoder encoder1;
     private final MoAbsoluteEncoder encoder2;
     private final GearRatios ratios;
     private final Angle range;
-
-    private final MutAngle measurement;
     private Angle encoderWraparoundRange;
 
     public record GearRatios(int mainGear, int gear1, int gear2) {
@@ -50,8 +47,6 @@ public class VernierEncoder {
         this.ratios = ratios;
         this.range = ratios.getRange();
 
-        measurement = Units.Rotations.mutable(0);
-
         this.encoderWraparoundRange = Units.Rotations.of(0.2);
     }
 
@@ -87,7 +82,7 @@ public class VernierEncoder {
             double guess1 = r1 * (revolutions1 + measure1);
             double guess2 = r2 * (revolutions2 + measure2);
             if (Math.abs(guess1 - guess2) < 5e-3) {
-                return Optional.of(measurement.mut_replace(applyWraparoundRange(guess1), Units.Rotations));
+                return Optional.of(Units.Rotations.of(applyWraparoundRange(guess1)));
             }
             if (guess1 < guess2) {
                 revolutions1 += 1;
@@ -96,7 +91,7 @@ public class VernierEncoder {
             }
         }
 
-        DriverStation.reportError("failed to solve vernier encoder", false);
+        DriverStationErrors.reportError("failed to solve vernier encoder", false);
         return Optional.empty();
     }
 }

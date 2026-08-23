@@ -1,12 +1,12 @@
-package frc.robot.molib.prefs;
+package first.robot.molib.prefs;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableEvent;
-import edu.wpi.first.networktables.NetworkTableValue;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableEvent;
+import org.wpilib.networktables.NetworkTableValue;
 
 public class Pref<T> {
     public final String key;
@@ -55,7 +55,7 @@ public class Pref<T> {
             entry.getInstance()
                     .addListener(
                             entry,
-                            EnumSet.of(NetworkTableEvent.Kind.kValueAll),
+                            EnumSet.of(NetworkTableEvent.Kind.VALUE_ALL),
                             (e) -> consumer.accept(getter.apply(e.valueData.value)));
         }
 

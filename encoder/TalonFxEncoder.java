@@ -1,9 +1,9 @@
-package frc.robot.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Units;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Units;
 
 public class TalonFxEncoder implements MoEncoder.Encoder {
     public static final TimeUnit VELOCITY_BASE_UNIT = Units.Seconds;

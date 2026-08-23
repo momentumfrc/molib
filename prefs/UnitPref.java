@@ -1,22 +1,17 @@
-package frc.robot.molib.prefs;
+package first.robot.molib.prefs;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableValue;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.MutableMeasure;
-import edu.wpi.first.units.Unit;
 import java.util.function.Consumer;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableValue;
+import org.wpilib.units.Measure;
+import org.wpilib.units.Unit;
 
 public class UnitPref<U extends Unit> {
     private final Pref<Double> basePref;
     private final U storeUnits;
 
-    private final MutableMeasure<U, ?, ?> currValue;
-
     public UnitPref(String key, U storeUnits, Measure<U> defaultValue) {
         String symbol = storeUnits.symbol().replaceAll("/", "_");
-
-        currValue = defaultValue.mutableCopy();
 
         this.basePref = new Pref<>(
                 String.format("%s (%s)", key, symbol),
@@ -27,8 +22,9 @@ public class UnitPref<U extends Unit> {
         this.storeUnits = storeUnits;
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<U> get() {
-        return currValue.mut_replace(basePref.get(), storeUnits);
+        return (Measure<U>) storeUnits.of(basePref.get());
     }
 
     public void set(Measure<U> value) {
@@ -39,8 +35,9 @@ public class UnitPref<U extends Unit> {
         subscribe(consumer, false);
     }
 
+    @SuppressWarnings("unchecked")
     public void subscribe(Consumer<Measure<U>> consumer, boolean notifyImmediately) {
-        basePref.subscribe((value) -> consumer.accept(currValue.mut_replace(value, storeUnits)), notifyImmediately);
+        basePref.subscribe(value -> consumer.accept((Measure<U>) storeUnits.of(value)), notifyImmediately);
     }
 
     public String getKey() {

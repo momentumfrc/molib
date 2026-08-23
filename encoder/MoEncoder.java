@@ -1,4 +1,4 @@
-package frc.robot.molib.encoder;
+package first.robot.molib.encoder;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -7,15 +7,14 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkAnalogSensor;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.SparkBaseConfig;
-import edu.wpi.first.units.DimensionlessUnit;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.MutableMeasure;
-import edu.wpi.first.units.PerUnit;
-import edu.wpi.first.units.TimeUnit;
-import edu.wpi.first.units.Unit;
-import frc.robot.molib.MoSparkConfigurator;
-import frc.robot.molib.MoUnits;
+import first.robot.molib.MoSparkConfigurator;
+import first.robot.molib.MoUnits;
 import java.util.function.Consumer;
+import org.wpilib.units.DimensionlessUnit;
+import org.wpilib.units.Measure;
+import org.wpilib.units.PerUnit;
+import org.wpilib.units.TimeUnit;
+import org.wpilib.units.Unit;
 
 /**
  * Wraps an encoder, keeping track of the encoder's internal units.
@@ -62,17 +61,11 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
      */
     private final VDim internalEncoderVelocityUnits;
 
-    private final MutableMeasure<Dim, ?, ?> mut_pos;
-    private final MutableMeasure<VDim, ?, ?> mut_vel;
-
     @SuppressWarnings("unchecked")
     MoEncoder(Encoder encoder, Dim internalEncoderUnits) {
         this.encoder = encoder;
         this.internalEncoderUnits = internalEncoderUnits;
         this.internalEncoderVelocityUnits = (VDim) internalEncoderUnits.per(encoder.getVelocityBaseUnit());
-
-        mut_pos = (MutableMeasure<Dim, ?, ?>) internalEncoderUnits.mutable(0);
-        mut_vel = (MutableMeasure<VDim, ?, ?>) internalEncoderVelocityUnits.mutable(0);
     }
 
     public Dim getInternalEncoderUnits() {
@@ -101,16 +94,18 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
         encoder.setPositionFactor(positionFactor);
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<Dim> getPosition() {
-        return mut_pos.mut_replace(encoder.getPosition(), internalEncoderUnits);
+        return (Measure<Dim>) internalEncoderUnits.of(encoder.getPosition());
     }
 
     public void setPosition(Measure<Dim> position) {
         encoder.setPosition(position.in(internalEncoderUnits));
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<VDim> getVelocity() {
-        return mut_vel.mut_replace(encoder.getVelocity(), internalEncoderVelocityUnits);
+        return (Measure<VDim>) internalEncoderVelocityUnits.of(encoder.getVelocity());
     }
 
     public double getPositionInEncoderUnits() {

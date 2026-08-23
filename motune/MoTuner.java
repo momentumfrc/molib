@@ -1,12 +1,5 @@
-package frc.robot.molib.motune;
+package first.robot.molib.motune;
 
-import edu.wpi.first.networktables.DoublePublisher;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableEvent;
-import edu.wpi.first.networktables.NetworkTableEvent.Kind;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -16,6 +9,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
+import org.wpilib.driverstation.DriverStationErrors;
+import org.wpilib.networktables.DoublePublisher;
+import org.wpilib.networktables.NetworkTable;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableEvent;
+import org.wpilib.networktables.NetworkTableEvent.Kind;
+import org.wpilib.networktables.NetworkTableInstance;
 
 /**
  * Utility class for storing controller parameters and state values in NetworkTables.
@@ -190,7 +190,8 @@ public class MoTuner implements NetworkTable.TableEventListener {
             try {
                 return Optional.of(build());
             } catch (Exception e) {
-                DriverStation.reportError("Failed to build tuner for controller [" + name + "]", e.getStackTrace());
+                DriverStationErrors.reportError(
+                        "Failed to build tuner for controller [" + name + "]", e.getStackTrace());
                 return Optional.empty();
             }
         }
@@ -219,7 +220,7 @@ public class MoTuner implements NetworkTable.TableEventListener {
         this.populateHook = populateHook;
 
         table = NetworkTableInstance.getDefault().getTable(TUNER_TABLE).getSubTable(name);
-        listenerHandle = table.addListener(EnumSet.of(NetworkTableEvent.Kind.kValueAll), this);
+        listenerHandle = table.addListener(EnumSet.of(NetworkTableEvent.Kind.VALUE_ALL), this);
 
         var parameterEntries = new HashMap<PIDParameter, NetworkTableEntry>();
         for (var mapEntry : parameters.entrySet()) {
@@ -246,7 +247,7 @@ public class MoTuner implements NetworkTable.TableEventListener {
 
     @Override
     public void accept(NetworkTable table, String key, NetworkTableEvent event) {
-        assert event.is(Kind.kValueAll);
+        assert event.is(Kind.VALUE_ALL);
 
         double value = event.valueData.value.getDouble();
 
