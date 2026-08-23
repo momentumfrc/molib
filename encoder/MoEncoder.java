@@ -94,17 +94,17 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
         encoder.setPositionFactor(positionFactor);
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<Dim> getPosition() {
-        // I think this cast is necessary, it might not be.
-        return (Measure<Dim>) internalEncoderUnits.of(getPositionInEncoderUnits());
+        return (Measure<Dim>) internalEncoderUnits.of(encoder.getPosition());
     }
 
     public void setPosition(Measure<Dim> position) {
         encoder.setPosition(position.in(internalEncoderUnits));
     }
 
+    @SuppressWarnings("unchecked")
     public Measure<VDim> getVelocity() {
-        // same thing with the cast
         return (Measure<VDim>) internalEncoderVelocityUnits.of(encoder.getVelocity());
     }
 
