@@ -1,15 +1,12 @@
 package first.robot.molib;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.wpilib.networktables.BooleanEntry;
 import org.wpilib.networktables.DoubleEntry;
 import org.wpilib.networktables.NetworkTable;
 import org.wpilib.networktables.NetworkTableInstance;
-import org.wpilib.smartdashboard.SendableBuilderImpl;
-import org.wpilib.smartdashboard.SendableChooser;
-import org.wpilib.util.sendable.Sendable;
-import org.wpilib.util.sendable.SendableRegistry;
+import org.wpilib.tunable.ComplexTunable;
+import org.wpilib.tunable.Selectable;
+import org.wpilib.tunable.TunableRegistry;
 
 public class NTHelpers {
 
@@ -43,47 +40,23 @@ public class NTHelpers {
         return entry;
     }
 
-    public static <T extends Enum<?>> SendableChooser<T> enumToChooser(Class<T> toConvert) {
+    public static <T extends Enum<?>> Selectable<T> enumToChooser(Class<T> toConvert) {
         return enumToChooser(toConvert, toConvert.getEnumConstants()[0]);
     }
 
-    public static <T extends Enum<?>> SendableChooser<T> enumToChooser(Class<T> toConvert, T defaultValue) {
-        var chooser = new SendableChooser<T>();
-        chooser.setDefaultOption(defaultValue.name(), defaultValue);
+    public static <T extends Enum<?>> Selectable<T> enumToChooser(Class<T> toConvert, T defaultValue) {
+        var chooser = new Selectable<T>();
+        chooser.addDefault(defaultValue.name(), defaultValue);
         for (T entry : toConvert.getEnumConstants()) {
             if (entry != defaultValue) {
-                chooser.addOption(entry.name(), entry);
+                chooser.addDefault(entry.name(), entry);
             }
         }
         return chooser;
     }
 
-    private static final Map<String, Sendable> tablesToData = new HashMap<>();
-
-    public static void publishSendable(NetworkTable table, Sendable data) {
-        String name = SendableRegistry.getName(data);
-        if (!name.isEmpty()) {
-            publishSendable(table, name, data);
-        }
-    }
-
-    public static void publishSendable(NetworkTable table, String key, Sendable data) {
-        NetworkTable dataTable = table.getSubTable(key);
-        if (tablesToData.get(key) == data) {
-            return;
-        }
-        tablesToData.put(key, data);
-        SendableBuilderImpl builder = new SendableBuilderImpl();
-        builder.setTable(dataTable);
-        SendableRegistry.publish(data, builder);
-        builder.startListeners();
-        dataTable.getEntry(".name").setString(key);
-    }
-
-    public static void updateSendables() {
-        for (Sendable data : tablesToData.values()) {
-            SendableRegistry.update(data);
-        }
+    public static void publishSendable(NetworkTable table, String key, ComplexTunable data) {
+        TunableRegistry.publish(table.getPath() + key, data);
     }
 
     private NTHelpers() {
