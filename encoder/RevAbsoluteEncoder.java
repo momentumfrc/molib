@@ -12,6 +12,8 @@ public class RevAbsoluteEncoder implements MoEncoder.Encoder {
     private final Consumer<Consumer<SparkBaseConfig>> configurator;
     private final AbsoluteEncoder encoder;
 
+    private double factor;
+
     public RevAbsoluteEncoder(AbsoluteEncoder encoder, Consumer<Consumer<SparkBaseConfig>> configurator) {
         this.encoder = encoder;
         this.configurator = configurator;
@@ -21,7 +23,7 @@ public class RevAbsoluteEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getPosition() {
-        return encoder.getPosition().get();
+        return factor * encoder.getPosition().get();
     }
 
     @Override
@@ -31,13 +33,17 @@ public class RevAbsoluteEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getVelocity() {
-        return encoder.getVelocity().get();
+        return factor * encoder.getVelocity().get();
     }
 
     @Override
     public void setPositionFactor(double factor) {
-        configurator.accept(config ->
-                config.absoluteEncoder.positionConversionFactor(factor).velocityConversionFactor(factor));
+        this.factor = factor;
+    }
+
+    @Override
+    public double getPositionFactor() {
+        return factor;
     }
 
     @Override

@@ -37,6 +37,11 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
          */
         public void setPositionFactor(double factor);
 
+        public default double getPositionFactor() {
+            throw new UnsupportedOperationException(
+                    this.getClass().getCanonicalName() + " does not support getPositionFactor()");
+        }
+
         /**
          * Velocity is measured in distance per time. However, the dividing time unit is different across different
          * encoders. For example, CTRE returns velocity in units of internalEncoderUnits per *second*, but
@@ -92,6 +97,10 @@ public class MoEncoder<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>> {
         double positionFactor = 1 / mechanismConversionFactor.in(MoUnits.EncoderTicks.per(internalEncoderUnits));
 
         encoder.setPositionFactor(positionFactor);
+    }
+
+    public double getConversionFactor() {
+        return encoder.getPositionFactor();
     }
 
     @SuppressWarnings("unchecked")

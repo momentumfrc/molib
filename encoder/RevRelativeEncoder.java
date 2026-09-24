@@ -12,6 +12,8 @@ public class RevRelativeEncoder implements MoEncoder.Encoder {
     private final Consumer<Consumer<SparkBaseConfig>> configurator;
     private final RelativeEncoder encoder;
 
+    private double factor;
+
     public RevRelativeEncoder(RelativeEncoder encoder, Consumer<Consumer<SparkBaseConfig>> configurator) {
         this.encoder = encoder;
         this.configurator = configurator;
@@ -21,23 +23,27 @@ public class RevRelativeEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getPosition() {
-        return encoder.getPosition().get();
+        return factor * encoder.getPosition().get();
     }
 
     @Override
     public void setPosition(double position) {
-        encoder.setPosition(position);
+        encoder.setPosition(position / factor);
     }
 
     @Override
     public double getVelocity() {
-        return encoder.getVelocity().get();
+        return factor * encoder.getVelocity().get();
     }
 
     @Override
     public void setPositionFactor(double factor) {
-        configurator.accept(
-                config -> config.encoder.positionConversionFactor(factor).velocityConversionFactor(factor));
+        this.factor = factor;
+    }
+
+    @Override
+    public double getPositionFactor() {
+        return factor;
     }
 
     @Override

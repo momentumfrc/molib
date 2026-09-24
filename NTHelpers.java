@@ -49,7 +49,7 @@ public class NTHelpers {
         chooser.addDefault(defaultValue.name(), defaultValue);
         for (T entry : toConvert.getEnumConstants()) {
             if (entry != defaultValue) {
-                chooser.addDefault(entry.name(), entry);
+                chooser.add(entry.name(), entry);
             }
         }
         return chooser;

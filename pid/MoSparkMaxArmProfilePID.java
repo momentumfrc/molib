@@ -6,6 +6,7 @@ import first.robot.molib.MoSparkConfigurator;
 import first.robot.molib.encoder.MoEncoder;
 import org.wpilib.math.controller.ArmFeedforward;
 import org.wpilib.math.trajectory.TrapezoidProfile;
+import org.wpilib.system.Timer;
 import org.wpilib.units.AngleUnit;
 import org.wpilib.units.AngularVelocityUnit;
 import org.wpilib.units.Measure;
@@ -20,7 +21,7 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
 
     // TODO run feedforward and profile calculations on-spark
     private TrapezoidProfile profile = null;
-    private TrapezoidProfile.Constraints profileConstraints = new TrapezoidProfile.Constraints(0, 0);
+    private TrapezoidProfile.Constraints profileConstraints = new TrapezoidProfile.Constraints(0.000001, 0.00000001);
     private TrapezoidProfile.State setpointState = null;
 
     private ArmFeedforward feedforward = new ArmFeedforward(0, 0, 0);
@@ -28,6 +29,8 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
     private Angle horizontalOffset = Units.Rotations.of(0);
 
     private double lastFF = 0;
+
+    Timer timer = new Timer();
 
     public MoSparkMaxArmProfilePID(
             SparkBase controller,
@@ -94,14 +97,14 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
             profile = new TrapezoidProfile(profileConstraints);
         }
 
-        if (setpointState == null
-        /* || Math.abs(internalEncoder.getPosition().in(Units.Degrees) - setpointState.position)
-        > REPATH_ERROR_DEGS */ ) {
+        if (setpointState == null || timer.isRunning() == false || timer.hasElapsed(0.5)) {
             setpointState = new TrapezoidProfile.State(
                     internalEncoder.getPosition().in(Units.Radians),
                     internalEncoder.getVelocity().in(Units.RadiansPerSecond));
             System.out.println("REPLAN");
         }
+
+        timer.restart();
 
         var goalState = new TrapezoidProfile.State(position.in(Units.Radians), 0);
 
@@ -110,6 +113,9 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
         double ff = calculateFF(Units.RadiansPerSecond.of(setpointState.velocity));
 
         double setpointNative = Units.Radians.of(setpointState.position).in(internalEncoder.getInternalEncoderUnits());
+
+        setpointNative /= internalEncoder.getConversionFactor();
+
         pidController.setSetpoint(setpointNative, type.innerType, pidSlot, ff);
 
         lastSetpoint = setpointNative;

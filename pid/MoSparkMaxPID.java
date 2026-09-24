@@ -136,10 +136,10 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
         switch (this.type) {
             case POSITION:
             case SMARTMOTION:
-                return internalEncoder.getPositionInEncoderUnits();
+                return internalEncoder.getPositionInEncoderUnits() / internalEncoder.getConversionFactor();
             case VELOCITY:
             case SMARTVELOCITY:
-                return internalEncoder.getVelocityInEncoderUnits();
+                return internalEncoder.getVelocityInEncoderUnits() / internalEncoder.getConversionFactor();
         }
 
         return 0;
@@ -151,6 +151,7 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
                     String.format("Cannot set position on PID controller of type %s", this.type.name()));
         }
         double value = position.in(internalEncoder.getInternalEncoderUnits());
+        value /= internalEncoder.getConversionFactor();
         pidController.setSetpoint(value, this.type.innerType, pidSlot);
         lastSetpoint = value;
     }
@@ -161,6 +162,7 @@ public class MoSparkMaxPID<Dim extends Unit, VDim extends PerUnit<Dim, TimeUnit>
                     String.format("Cannot set velocity on PID controller of type %s", this.type.name()));
         }
         double value = velocity.in(internalEncoder.getInternalEncoderVelocityUnits());
+        value /= internalEncoder.getConversionFactor();
         pidController.setSetpoint(value, this.type.innerType, pidSlot);
         lastSetpoint = value;
     }

@@ -12,6 +12,8 @@ public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
     private final Consumer<Consumer<SparkBaseConfig>> configurator;
     private final SparkAnalogSensor sensor;
 
+    private double factor;
+
     public RevAnalogSensorEncoder(SparkAnalogSensor sparkAnalog, Consumer<Consumer<SparkBaseConfig>> configurator) {
         this.sensor = sparkAnalog;
         this.configurator = configurator;
@@ -21,7 +23,7 @@ public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getPosition() {
-        return sensor.getPosition().get();
+        return factor * sensor.getPosition().get();
     }
 
     @Override
@@ -31,13 +33,17 @@ public class RevAnalogSensorEncoder implements MoEncoder.Encoder {
 
     @Override
     public double getVelocity() {
-        return sensor.getVelocity().get();
+        return factor * sensor.getVelocity().get();
     }
 
     @Override
     public void setPositionFactor(double factor) {
-        configurator.accept(
-                config -> config.analogSensor.positionConversionFactor(factor).velocityConversionFactor(factor));
+        this.factor = factor;
+    }
+
+    @Override
+    public double getPositionFactor() {
+        return factor;
     }
 
     @Override
