@@ -91,20 +91,23 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
         return feedforward.calculate(currPosFromHorizon, velocityReference.in(Units.RadiansPerSecond));
     }
 
+    public void resetTrapezoid() {
+        setpointState = new TrapezoidProfile.State(
+                    internalEncoder.getPosition().in(Units.Radians),
+                    0);
+    }
+
     @Override
     public void setPositionReference(Measure<AngleUnit> position) {
         if (profile == null) {
             profile = new TrapezoidProfile(profileConstraints);
         }
 
-        if (setpointState == null || timer.isRunning() == false || timer.hasElapsed(0.5)) {
-            setpointState = new TrapezoidProfile.State(
-                    internalEncoder.getPosition().in(Units.Radians),
-                    internalEncoder.getVelocity().in(Units.RadiansPerSecond));
-            System.out.println("REPLAN");
+        if (setpointState == null /*|| timer.isRunning() == false || timer.hasElapsed(0.5)*/) {
+            resetTrapezoid();
         }
 
-        timer.restart();
+        //timer.restart();
 
         var goalState = new TrapezoidProfile.State(position.in(Units.Radians), 0);
 
