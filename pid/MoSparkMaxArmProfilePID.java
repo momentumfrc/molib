@@ -92,9 +92,7 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
     }
 
     public void resetTrapezoid() {
-        setpointState = new TrapezoidProfile.State(
-                    internalEncoder.getPosition().in(Units.Radians),
-                    0);
+        setpointState = new TrapezoidProfile.State(internalEncoder.getPosition().in(Units.Radians), 0);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class MoSparkMaxArmProfilePID extends MoSparkMaxPID<AngleUnit, AngularVel
             resetTrapezoid();
         }
 
-        //timer.restart();
+        // timer.restart();
 
         var goalState = new TrapezoidProfile.State(position.in(Units.Radians), 0);
 
